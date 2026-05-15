@@ -28,3 +28,7 @@ ai-llm / web-dev / infra-data / concept
 ## 既知のトレードオフ
 
 - `docs/.pages` は空フォルダ対策で `...` (rest-expansion) を使用。副作用としてカテゴリ表示順がアルファベット順 (ai-llm → concept → infra-data → web-dev) になる。移行完了後 (Task 10) に明示列挙 (`index.md` / ai-llm / web-dev / infra-data / concept) へ戻し、`mkdocs build --strict` を再確認する予定。
+
+## comparison-create スキル
+- 配置: ~/.claude/skills/comparison-create/SKILL.md（リポジトリ外）
+- 起動: 「XとYの比較を作って」等。venv 経由で scripts.new_comparison → mkdocs build --strict。
