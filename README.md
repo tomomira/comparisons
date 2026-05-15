@@ -4,17 +4,18 @@
 
 ## セットアップ
 
-    pip install -r requirements-dev.txt
+    python3 -m venv .venv
+    ./.venv/bin/pip install -r requirements-dev.txt
 
 ## ビルド / 閲覧
 
-    mkdocs build --strict     # site/ に静的HTML生成
-    mkdocs serve              # http://127.0.0.1:8000 でプレビュー
+    ./.venv/bin/mkdocs build --strict     # site/ に静的HTML生成
+    ./.venv/bin/mkdocs serve              # http://127.0.0.1:8000 でプレビュー
 
 ## 新しい比較を追加
 
 - 推奨: Claude スキル `comparison-create`（「XとYの比較を作って」）
-- 手動: `python -m scripts.new_comparison --title "XとYの違い" --category ai-llm --slug x-vs-y`
+- 手動: `./.venv/bin/python -m scripts.new_comparison --title "XとYの違い" --category ai-llm --slug x-vs-y`
 
 ## ディレクトリ
 
@@ -25,4 +26,4 @@
 
 ## テスト
 
-    pytest -q
+    ./.venv/bin/pytest -q
