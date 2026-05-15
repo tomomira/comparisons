@@ -32,3 +32,24 @@ ai-llm / web-dev / infra-data / concept
 ## comparison-create スキル
 - 配置: ~/.claude/skills/comparison-create/SKILL.md（リポジトリ外）
 - 起動: 「XとYの比較を作って」等。venv 経由で scripts.new_comparison → mkdocs build --strict。
+
+## 運用
+- 新規追加: `comparison-create` スキル（「XとYの比較を作って」）
+- 手動追加: `./.venv/bin/python -m scripts.new_comparison --title ... --category ... --slug ...`
+- ビルド: `./.venv/bin/mkdocs build --strict` / プレビュー: `./.venv/bin/mkdocs serve`
+- テスト: `./.venv/bin/pytest -q`
+- 既存29本は 2026-05-15 に Obsidian 20_Article から一方向移行済み（Obsidian側は不変）
+- Obsidian 00_inbox/比較 の旧スクリプトは役目を終えた（本プロジェクトが後継）
+
+## 実行時の設計補正（実装中に確定した事項）
+- build_front_matter は日付を引用符付き文字列で出力（YAML が date 型に解釈するのを防止）。
+- build_front_matter に `allow_unknown_category` パラメータを追加。write_comparison が
+  `allow_unknown_category=(category_title is not None)` を渡すことで、新規カテゴリは
+  `--category-title` 指定時のみ許可（既知4カテゴリの誤記は従来通り ValueError）。
+- split_front_matter は先頭で CRLF→LF 正規化（防御的ハードニング）。
+- docs/.pages は移行後に明示 nav（index.md / ai-llm / web-dev / infra-data / concept）へ復元済み。
+- 依存はプロジェクト内 `.venv/`（gitignore 済み）に導入。全コマンドは venv 経由で実行する。
+- 既知の faithful-to-source 事項（将来の改善候補・現状は問題なし）:
+  iaas-paas-saas に旧式 `<center>`、一部 ai-llm 記事の表セルに `<br>`、
+  react-vue-streamlit は元ファイル由来で H1 なし。
+- Material チームの赤い宣伝バナーは mkdocs の WARNING ではなく `--strict` に影響しない。
