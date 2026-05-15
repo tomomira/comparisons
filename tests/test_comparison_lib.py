@@ -180,3 +180,10 @@ def test_split_front_matter_absent():
     fm, body = split_front_matter(text)
     assert fm == {}
     assert body == text
+
+
+def test_split_front_matter_crlf():
+    text = '---\r\ntitle: "T"\r\ntags: [a, b]\r\n---\r\n# 本文\r\nx\r\n'
+    fm, body = split_front_matter(text)
+    assert fm == {"title": "T", "tags": ["a", "b"]}
+    assert body == "# 本文\nx\n"

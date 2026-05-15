@@ -119,6 +119,7 @@ def split_front_matter(text: str):
     title と tags のみ簡易抽出（移行用途。runtime stdlib のみ）。
     front matter が無ければ ({}, text) を返す。
     """
+    text = text.replace("\r\n", "\n")
     if not text.startswith("---\n"):
         return {}, text
     end = text.find("\n---\n", 4)
