@@ -163,3 +163,20 @@ def test_build_front_matter_allows_unknown_category_when_opted_in():
         allow_unknown_category=True,
     )
     assert "category: brand-new" in fm
+
+
+from scripts.comparison_lib import split_front_matter
+
+
+def test_split_front_matter_present():
+    text = '---\ntitle: "T"\ntags: [a, b]\n---\n# 本文\nx\n'
+    fm, body = split_front_matter(text)
+    assert fm == {"title": "T", "tags": ["a", "b"]}
+    assert body == "# 本文\nx\n"
+
+
+def test_split_front_matter_absent():
+    text = "# 本文\nx\n"
+    fm, body = split_front_matter(text)
+    assert fm == {}
+    assert body == text

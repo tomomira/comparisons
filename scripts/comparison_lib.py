@@ -111,3 +111,33 @@ def write_comparison(
         content += "\n"
     path.write_text(content, encoding="utf-8")
     return path
+
+
+def split_front_matter(text: str):
+    """先頭 YAML front matter を (dict, 残り本文) に分離する。
+
+    title と tags のみ簡易抽出（移行用途。runtime stdlib のみ）。
+    front matter が無ければ ({}, text) を返す。
+    """
+    if not text.startswith("---\n"):
+        return {}, text
+    end = text.find("\n---\n", 4)
+    if end == -1:
+        return {}, text
+    block = text[4:end]
+    body = text[end + 5:]
+    data = {}
+    for line in block.splitlines():
+        if line.startswith("title:"):
+            val = line[len("title:"):].strip().strip('"').strip("'")
+            if val:
+                data["title"] = val
+        elif line.startswith("tags:"):
+            val = line[len("tags:"):].strip()
+            if val.startswith("[") and val.endswith("]"):
+                inner = val[1:-1].strip()
+                data["tags"] = (
+                    [t.strip() for t in inner.split(",") if t.strip()]
+                    if inner else []
+                )
+    return data, body
