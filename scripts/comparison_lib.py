@@ -72,3 +72,40 @@ def ensure_category(docs_dir, category: str, title: str | None = None) -> Path:
     if not pages.exists():
         pages.write_text(f"title: {resolved_title}\n", encoding="utf-8")
     return cat_dir
+
+
+def write_comparison(
+    docs_dir,
+    *,
+    category,
+    slug,
+    title,
+    tags,
+    freshness,
+    created,
+    updated,
+    body,
+    force=False,
+    category_title=None,
+) -> Path:
+    """front matter + body を docs_dir/category/slug.md に書き込む。"""
+    docs_dir = Path(docs_dir)
+    cat_dir = ensure_category(docs_dir, category, title=category_title)
+    path = cat_dir / f"{slug}.md"
+    if path.exists() and not force:
+        raise FileExistsError(
+            f"既に存在します: {path}（上書きは force=True）"
+        )
+    fm = build_front_matter(
+        title=title,
+        category=category,
+        tags=tags,
+        created=created,
+        updated=updated,
+        freshness=freshness,
+    )
+    content = fm + "\n" + body if not body.startswith("\n") else fm + body
+    if not content.endswith("\n"):
+        content += "\n"
+    path.write_text(content, encoding="utf-8")
+    return path

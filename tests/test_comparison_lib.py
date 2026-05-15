@@ -110,3 +110,47 @@ def test_ensure_category_new_with_title(tmp_path):
     assert (tmp_path / "brand-new" / ".pages").read_text(
         encoding="utf-8"
     ).strip() == "title: 新カテゴリ"
+
+
+from scripts.comparison_lib import write_comparison
+
+
+def test_write_comparison_creates_file(tmp_path):
+    path = write_comparison(
+        tmp_path,
+        category="ai-llm",
+        slug="x-vs-y",
+        title="XとYの違い",
+        tags=["X", "Y"],
+        freshness="stable",
+        created="2026-05-15",
+        updated="2026-05-15",
+        body="# XとYの違い\n\n本文\n",
+    )
+    assert path == tmp_path / "ai-llm" / "x-vs-y.md"
+    text = path.read_text(encoding="utf-8")
+    assert text.startswith("---\n")
+    assert 'title: "XとYの違い"' in text
+    assert text.rstrip().endswith("本文")
+    assert (tmp_path / "ai-llm" / ".pages").exists()
+
+
+def test_write_comparison_refuses_overwrite(tmp_path):
+    kw = dict(
+        category="ai-llm", slug="dup", title="A", tags=[],
+        freshness="stable", created="2026-05-15", updated="2026-05-15",
+        body="# A\n",
+    )
+    write_comparison(tmp_path, **kw)
+    with pytest.raises(FileExistsError):
+        write_comparison(tmp_path, **kw)
+
+
+def test_write_comparison_force_overwrites(tmp_path):
+    kw = dict(
+        category="ai-llm", slug="dup", title="A", tags=[],
+        freshness="stable", created="2026-05-15", updated="2026-05-15",
+    )
+    write_comparison(tmp_path, body="# A\n\n旧\n", **kw)
+    path = write_comparison(tmp_path, body="# A\n\n新\n", force=True, **kw)
+    assert path.read_text(encoding="utf-8").rstrip().endswith("新")
