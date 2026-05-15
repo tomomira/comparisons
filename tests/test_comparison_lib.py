@@ -154,3 +154,12 @@ def test_write_comparison_force_overwrites(tmp_path):
     write_comparison(tmp_path, body="# A\n\n旧\n", **kw)
     path = write_comparison(tmp_path, body="# A\n\n新\n", force=True, **kw)
     assert path.read_text(encoding="utf-8").rstrip().endswith("新")
+
+
+def test_build_front_matter_allows_unknown_category_when_opted_in():
+    fm = build_front_matter(
+        title="A", category="brand-new", tags=[],
+        created="2026-05-15", updated="2026-05-15", freshness="stable",
+        allow_unknown_category=True,
+    )
+    assert "category: brand-new" in fm

@@ -10,7 +10,6 @@ import sys
 from datetime import date
 from pathlib import Path
 
-from scripts.categories import CATEGORY_TITLES
 from scripts.comparison_lib import slugify, write_comparison
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -45,18 +44,6 @@ def main(argv=None) -> int:
         "{{TITLE}}", args.title
     )
 
-    # 新規カテゴリの場合: --category-title が必要。CATEGORY_TITLES に一時登録して
-    # build_front_matter のバリデーションを通過させる。
-    category_is_new = args.category not in CATEGORY_TITLES
-    if category_is_new:
-        if not args.category_title:
-            print(
-                f"エラー: 新規カテゴリ {args.category!r} には --category-title が必要です",
-                file=sys.stderr,
-            )
-            return 1
-        CATEGORY_TITLES[args.category] = args.category_title
-
     try:
         path = write_comparison(
             args.docs,
@@ -74,10 +61,6 @@ def main(argv=None) -> int:
     except (FileExistsError, ValueError) as e:
         print(f"エラー: {e}", file=sys.stderr)
         return 1
-    finally:
-        # 一時登録したカテゴリを元に戻す（グローバル状態の汚染を防ぐ）
-        if category_is_new and args.category in CATEGORY_TITLES:
-            del CATEGORY_TITLES[args.category]
 
     print(f"作成しました: {path}")
     return 0

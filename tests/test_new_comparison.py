@@ -43,7 +43,7 @@ def test_existing_file_without_force_fails(tmp_path):
     assert _run(args, cwd=ROOT).returncode == 0
     r2 = _run(args, cwd=ROOT)
     assert r2.returncode != 0
-    assert "既に存在" in (r2.stderr + r2.stdout)
+    assert "既に存在" in r2.stderr
 
 
 def test_new_category_requires_title(tmp_path):

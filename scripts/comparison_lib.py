@@ -28,8 +28,9 @@ def slugify(text: str) -> str:
     return s
 
 
-def build_front_matter(*, title, category, tags, created, updated, freshness) -> str:
-    if category not in CATEGORY_TITLES:
+def build_front_matter(*, title, category, tags, created, updated, freshness,
+                        allow_unknown_category: bool = False) -> str:
+    if not allow_unknown_category and category not in CATEGORY_TITLES:
         raise ValueError(
             f"未知のカテゴリ: {category!r}（有効: {sorted(CATEGORY_TITLES)}）"
         )
@@ -103,6 +104,7 @@ def write_comparison(
         created=created,
         updated=updated,
         freshness=freshness,
+        allow_unknown_category=category_title is not None,
     )
     content = fm + "\n" + body if not body.startswith("\n") else fm + body
     if not content.endswith("\n"):
