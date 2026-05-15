@@ -81,3 +81,32 @@ def test_build_front_matter_rejects_bad_date():
             title="A", category="ai-llm", tags=[],
             created="2026/05/15", updated="2026-05-15", freshness="stable",
         )
+
+
+from scripts.comparison_lib import ensure_category
+
+
+def test_ensure_category_known_creates_pages(tmp_path):
+    ensure_category(tmp_path, "ai-llm")
+    pages = tmp_path / "ai-llm" / ".pages"
+    assert pages.read_text(encoding="utf-8").strip() == "title: AI・LLM"
+
+
+def test_ensure_category_idempotent_keeps_existing(tmp_path):
+    d = tmp_path / "ai-llm"
+    d.mkdir()
+    (d / ".pages").write_text("title: カスタム\n", encoding="utf-8")
+    ensure_category(tmp_path, "ai-llm")
+    assert (d / ".pages").read_text(encoding="utf-8").strip() == "title: カスタム"
+
+
+def test_ensure_category_new_requires_title(tmp_path):
+    with pytest.raises(ValueError):
+        ensure_category(tmp_path, "brand-new")
+
+
+def test_ensure_category_new_with_title(tmp_path):
+    ensure_category(tmp_path, "brand-new", title="新カテゴリ")
+    assert (tmp_path / "brand-new" / ".pages").read_text(
+        encoding="utf-8"
+    ).strip() == "title: 新カテゴリ"

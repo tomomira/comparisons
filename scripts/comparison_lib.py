@@ -49,3 +49,26 @@ def build_front_matter(*, title, category, tags, created, updated, freshness) ->
         f"freshness: {freshness}\n"
         "---\n"
     )
+
+
+def ensure_category(docs_dir, category: str, title: str | None = None) -> Path:
+    """docs_dir/category ディレクトリと .pages（初回のみ）を用意する。
+
+    既知カテゴリは CATEGORY_TITLES のタイトルを使用。新規カテゴリは
+    title 必須。.pages が既にあれば内容は変更しない。
+    """
+    docs_dir = Path(docs_dir)
+    if category in CATEGORY_TITLES:
+        resolved_title = CATEGORY_TITLES[category]
+    elif title:
+        resolved_title = title
+    else:
+        raise ValueError(
+            f"新規カテゴリ {category!r} には title が必要です"
+        )
+    cat_dir = docs_dir / category
+    cat_dir.mkdir(parents=True, exist_ok=True)
+    pages = cat_dir / ".pages"
+    if not pages.exists():
+        pages.write_text(f"title: {resolved_title}\n", encoding="utf-8")
+    return cat_dir
