@@ -1,5 +1,6 @@
 site_name: 比較ナレッジ集
-site_description: 技術・ツール・概念の比較記事集（個人用ローカル閲覧）
+site_description: 技術・ツール・概念の比較記事集
+site_url: https://tomomira.github.io/comparisons/
 docs_dir: docs
 site_dir: site
 use_directory_urls: true
