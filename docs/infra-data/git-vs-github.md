@@ -108,4 +108,4 @@ GitとGitHubは別物ですが、現代の開発において、この2つはセ�
 - Git 公式「About Git」（Git は分散バージョン管理システム。中核はコマンドラインツールで、GitHub/GitLab 等のホスティングを含む大きなエコシステムを持つ）: https://git-scm.com/about
 - Git 公式「Trademark Policy」（「Git」の名称・ロゴの商標は Software Freedom Conservancy が保有。ソフトウェア本体は GPLv2 の自由ソフトウェア。Git は Conservancy のメンバープロジェクト）: https://git-scm.com/about/trademark
 - GitHub Docs「About GitHub and Git」（GitHub はコードを保管・共有・協業するクラウドプラットフォームで、オープンソースの Git の上に構築されている。Git が変更を追跡し、GitHub がリポジトリをホストし協業を可能にする）: https://docs.github.com/en/get-started/start-your-journey/about-github-and-git
-- GitHub「GitHub および GitHub Docs について / Microsoft 傘下」（GitHub は 2018 年に Microsoft が買収）: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+- GitHub 公式ブログ「A bright future for GitHub」（2018年 Microsoft による買収を発表）: https://github.blog/news-insights/company-news/a-bright-future-for-github/
