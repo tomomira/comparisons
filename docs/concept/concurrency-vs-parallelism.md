@@ -49,6 +49,6 @@ Go 公式ブログ（Andrew Gerrand, 2013-01-16）は、より形式的に「並
 
 ## 出典・参考
 
-- [Concurrency is not parallelism — The Go Programming Language（Andrew Gerrand, 2013-01-16）](https://go.dev/blog/waza-talk) — Rob Pike の定義「dealing with vs doing」「composition vs simultaneous execution」
-- [Concurrency is not Parallelism — Rob Pike 講演スライド（Waza 2012）](https://go.dev/talks/2012/waza.slide) — 原典の講演スライド
+- [Concurrency is not parallelism — The Go Programming Language（Andrew Gerrand, 2013-01-16）](https://go.dev/blog/waza-talk) — Rob Pike の講演を紹介する Go 公式ブログ記事（背景・文脈）
+- [Concurrency is not Parallelism — Rob Pike 講演スライド（Waza 2012）](https://go.dev/talks/2012/waza.slide) — 原典の講演スライド。定義「dealing with vs doing」「composition vs simultaneous execution」の出どころ
 </content>

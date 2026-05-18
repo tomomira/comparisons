@@ -33,7 +33,7 @@ POSIX threads の仕様では、同一プロセス内のスレッドはグロー
 
 - **「スレッドはメモリを共有しないので速い」は誤り。** 逆です。スレッドが軽量なのは*メモリ空間を共有するため*にプロセスのような独立アドレス空間の確保が不要だからです。共有しているからこそ、複数スレッドが同じ変数を同時更新するとデータ競合が起き、ミューテックス等の排他制御が必要になります。
 
-- **「Python のスレッドは GIL があるから常に無意味」は誤り（過度な一般化）。** GIL（グローバルインタプリタロック）は CPython という特定実装の事情であり、OS スレッドやスレッドという概念一般の制約ではありません。Java や C++ のスレッドにはこの制約はありません。さらに CPython でも、I/O 待ち（ネットワーク・ファイル）の間は GIL が解放されるためスレッドで並行化の効果が出ますし、Python 3.13 以降は PEP 703 に基づく GIL なし（free-threaded）ビルドが実験的に提供されています。「CPU バウンドな純 Python 計算を CPython の標準ビルドでマルチコア並列化したい」場合に限り効果が出にくい、というのが正確な理解です。
+- **「Python のスレッドは GIL があるから常に無意味」は誤り（過度な一般化）。** GIL（グローバルインタプリタロック）は CPython という特定実装の事情であり、OS スレッドやスレッドという概念一般の制約ではありません。Java や C++ のスレッドにはこの制約はありません。さらに CPython でも、I/O 待ち（ネットワーク・ファイル）の間は GIL が解放されるためスレッドで並行化の効果が出ますし、GIL を撤廃する取り組みも進んでいます。Python 3.13 で実験的に導入された free-threaded（GIL なし）ビルドは、Python 3.14（2025年10月）以降 PEP 779 に基づき公式サポート（ただし既定では無効でオプトイン）となっています。「CPU バウンドな純 Python 計算を CPython の標準ビルドでマルチコア並列化したい」場合に限り効果が出にくい、というのが正確な理解です。
 
 - **「マルチスレッドは必ずマルチプロセスより速い」も誤り。** 切り替えコストはスレッドが安いものの、共有状態のロック競合が増えると逆にスケールしません。障害分離やメモリ隔離が必要な場面ではプロセス分割の方が総合的に優れることが多くあります。
 
@@ -53,6 +53,7 @@ POSIX threads の仕様では、同一プロセス内のスレッドはグロー
 - [pthreads(7) — Linux manual page (man7.org)](https://man7.org/linux/man-pages/man7/pthreads.7.html) — スレッド間で共有される資源と各スレッド固有の属性の定義
 - [Thread State and the Global Interpreter Lock — Python C API 公式ドキュメント](https://docs.python.org/3/c-api/threads.html) — GIL とスレッドごとの PyThreadState
 - [PEP 703 – Making the Global Interpreter Lock Optional in CPython](https://peps.python.org/pep-0703/) — free-threaded ビルドの仕様
+- [Python support for free threading — Python HOWTO 公式ドキュメント](https://docs.python.org/3/howto/free-threading-python.html) — Python 3.14 で PEP 779 に基づき公式サポート（既定無効・オプトイン）となった free-threaded ビルドの解説
 - [threading — Thread-based parallelism — Python 公式ドキュメント](https://docs.python.org/3/library/threading.html) — Python スレッドと GIL の挙動
 </content>
 </invoke>
