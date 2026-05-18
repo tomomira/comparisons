@@ -32,7 +32,7 @@ LLM に外部システムを連携させる話になると「MCP」「関数呼�
 | 主な構成要素 | tools 定義／tool_use／tool_result | Host・Client・Server、primitives（tools/resources/prompts） | マニフェスト＋API（OpenAPI 等） |
 | 提供範囲 | 関数（ツール）の呼び出し | tools に加え resources（文脈データ）・prompts も | 主にツール的なアクション |
 | 再利用性 | アプリごとに実装 | 「一度作れば多くのクライアントで使える」 | そのプラットフォーム内に限定 |
-| 現況 | 主要 LLM で標準機能 | Anthropic 発のオープン標準、広範なクライアント/サーバが対応 | ChatGPT plugins は2024年に終了、GPTs/Actions へ移行 |
+| 現況 | 主要 LLM で標準機能 | Anthropic 発のオープン標準、広範なクライアント/サーバが対応 | ChatGPT plugins は2024年に終了（新規作成終了 2024-03-19／完全終了 2024-04-09）、GPTs/Actions へ移行 |
 
 ## よくある誤解
 
