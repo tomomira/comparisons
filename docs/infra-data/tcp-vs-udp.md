@@ -37,7 +37,7 @@ TCP は**コネクション型**で、3 ウェイハンドシェイクで接続�
 ## よくある誤解
 
 - **誤解1：「UDP は TCP の劣化版で、使うべきではない」** — 用途が違うだけで優劣ではありません。リアルタイム音声・映像では、古いデータを再送して順番待ちさせるより、欠落フレームを捨てて最新を優先したほうが体感品質が高い。再送・順序整列が「邪魔」になる領域で UDP は積極的に選ばれます。
-- **誤解2：「UDP は信頼性が一切ないので重要な通信には使えない」** — UDP 自体に信頼性機構がないのは事実ですが、信頼性を**アプリ／上位プロトコル側で再実装できます**。実例が QUIC（RFC 9000）です。QUIC は UDP 上で動きつつ、独自の再送・順序整列・輻輳制御を実装し、信頼性のあるストリームを提供します。HTTP/3 はこの QUIC の上で動いています。
+- **誤解2：「UDP は信頼性が一切ないので重要な通信には使えない」** — UDP 自体に信頼性機構がないのは事実ですが、信頼性を**アプリ／上位プロトコル側で再実装できます**。実例が QUIC（RFC 9000）です。QUIC は UDP 上で動きつつ、独自の再送・順序整列・独自の損失回復・輻輳制御（RFC 9002）を実装し、信頼性のあるストリームを提供します。HTTP/3 はこの QUIC の上で動いています。
 - **誤解3：「TCP なら順序が保証されるので遅延は起きない」** — 順序保証はむしろ遅延要因になりえます。TCP は 1 つのセグメントが欠落すると、後続が届いていてもそれを再送が完了するまでアプリに渡しません（Head-of-line ブロッキング）。HTTP/2 がこの TCP レベルの HOL に悩み、HTTP/3 が UDP ベースの QUIC に移った主因がこれです。
 - **誤解4：「UDP はチェックサムすらないので壊れたデータも素通り」** — UDP にもチェックサムフィールドはあります（IPv4 では任意、IPv6 では必須）。ただし検出するだけで、壊れていればそのデータグラムが破棄されるのみ。再送はされません。
 
@@ -58,3 +58,4 @@ TCP は「順序通り・欠落なしを保証する代わりに手続きと遅�
 - RFC 9293「Transmission Control Protocol (TCP)」（TCP は reliable, in-order, byte-stream service を提供。3 ウェイハンドシェイク。RFC 793 ほかを obsolete）: https://www.rfc-editor.org/rfc/rfc9293.html
 - RFC 768「User Datagram Protocol」（UDP は最小オーバーヘッドのデータグラム。delivery and duplicate protection are not guaranteed。チェックサムは省略可）: https://www.rfc-editor.org/rfc/rfc768.html
 - RFC 9000「QUIC: A UDP-Based Multiplexed and Secure Transport」（QUIC は UDP 上で reliable・in-order なストリームと独自の輻輳制御を提供、HTTP/3 の土台）: https://www.rfc-editor.org/rfc/rfc9000.html
+- [RFC 9002 - QUIC Loss Detection and Congestion Control](https://www.rfc-editor.org/rfc/rfc9002) — QUIC の損失回復・輻輳制御の規定
