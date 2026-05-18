@@ -141,4 +141,8 @@ def split_front_matter(text: str):
                     [t.strip() for t in inner.split(",") if t.strip()]
                     if inner else []
                 )
+        elif line.startswith("category:"):
+            val = line[len("category:"):].strip().strip('"').strip("'")
+            if val:
+                data["category"] = val
     return data, body
