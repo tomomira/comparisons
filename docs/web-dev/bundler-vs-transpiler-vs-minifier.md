@@ -62,4 +62,4 @@ freshness: stable
 - Babel 公式「What is Babel?」（「Babel is a JavaScript compiler」「a toolchain that is mainly used to convert ECMAScript 2015+ code into a backwards compatible version of JavaScript」。構文変換・polyfill・codemods。ソース→ソース変換）: https://babeljs.io/docs/
 - Terser 公式（「JavaScript mangler and compressor toolkit」「an industry-standard minifier for JavaScript code」。compress/mangle 段で意味を保ったままサイズ削減。`async minify(code, options)`）: https://terser.org/
 - esbuild 公式（「An extremely fast bundler for the web」。major features に tree shaking・minification・source maps を含み、bundle/transform/minify を兼任。bundle はデフォルト無効で明示有効化が必要）: https://esbuild.github.io/
-- esbuild 公式 API「Minify」「Bundle」（minify はサイズ最適化、bundle は import 依存をファイルにインライン化する処理。両者は別オプション）: https://esbuild.github.io/api/#minify
+- esbuild 公式 API「Bundle」「Minify」（bundle は import 依存をファイルにインライン化する処理でデフォルト無効・明示有効化が必要、minify はサイズ最適化。両者は独立した別オプション）: https://esbuild.github.io/api/#bundle および https://esbuild.github.io/api/#minify

@@ -13,7 +13,7 @@ freshness: stable
 
 WebAssembly（Wasm）・JavaScript・asm.js は、いずれも「Web 上でコードを動かす」ために使われますが、**何であるか（言語なのか、命令フォーマットなのか、サブセットなのか）と、どう実行されるか**がまったく異なります。JavaScript は Web の標準的な動的言語で、コンパイル不要・動的型付け・人が直接書くもの。WebAssembly は公式定義で「**スタックベースの仮想マシン向けのバイナリ命令フォーマット**（a binary instruction format for a stack-based virtual machine）」であり、C/C++/Rust などをコンパイルする**ポータブルなコンパイル先**です。asm.js はその WebAssembly が登場する前に Mozilla が作った、**JavaScript の厳格なサブセット**で、AOT（事前）最適化が効くよう機能を絞った歴史的な技術です。
 
-重要なのは、**WebAssembly は JavaScript の置き換えではない**という点です。WebAssembly 公式 FAQ は「No! WebAssembly is designed to be a complement to, not replacement of, JavaScript」と明言し、MDN も「it is not intended as a replacement. Instead, it is designed to complement and work alongside JavaScript」と述べています。3者の関係は「JS という土台の言語があり、asm.js はその上で高速化を狙った歴史的サブセット、WebAssembly はそれを正統に置き換えた別フォーマットで JS と協調動作する」と整理できます。
+重要なのは、**WebAssembly は JavaScript の置き換えではない**という点です。WebAssembly 公式 FAQ は「No! WebAssembly is designed to be a complement to, not replacement of, JavaScript」と明言し、MDN も「it is not intended as a replacement. Instead, it is designed to complement and work alongside JavaScript」と述べています。3者の関係は「JS という土台の言語があり、asm.js はその上で高速化を狙った歴史的サブセット、WebAssembly はその事実上の後継となった別フォーマットで JS と協調動作する」と整理できます。
 
 ## 例えるなら：同じ Web 上の「書き方」の違い
 
@@ -32,7 +32,7 @@ WebAssembly（Wasm）・JavaScript・asm.js は、いずれも「Web 上でコ�
 | 実行 | 安全なサンドボックス VM。同一オリジン/許可ポリシーを適用 | エンジンが解釈/JIT | JS エンジンで実行。対応エンジンは AOT 最適化 |
 | 性能の狙い | ネイティブ近傍（near-native）の速度 | 柔軟性・表現力重視（高速だが Wasm ほど一定でない） | 標準 JS より高速、AOT 最適化が効くよう機能を制限 |
 | JS との関係 | 置き換えではなく補完。JS API 経由で相互呼び出し | Web の中心言語であり続ける | JS の一部なので非対応エンジンでも普通の JS として動く |
-| 位置づけ | asm.js を正統に置き換えた現行標準（W3C 標準） | 歴史的にも現在も Web の標準言語 | 歴史的技術。WebAssembly に置き換えられた（fallback 用途は残る） |
+| 位置づけ | asm.js の後継となった現行標準（W3C 標準） | 歴史的にも現在も Web の標準言語 | 歴史的技術。WebAssembly に置き換えられた（fallback 用途は残る） |
 
 ## よくある誤解
 
