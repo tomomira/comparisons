@@ -1,5 +1,5 @@
 ---
-title: "JavaScriptとTypeScriptsの違い"
+title: "JavaScriptとTypeScriptの違い"
 category: web-dev
 tags: [language, frontend]
 created: "2025-08-10"
