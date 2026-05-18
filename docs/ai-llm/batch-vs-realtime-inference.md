@@ -61,4 +61,4 @@ freshness: stable
 - AWS SageMaker AI「Batch transform for inference」（大量データセットからの推論、永続的なエンドポイントが不要な場合に使う）: https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html
 - AWS SageMaker AI「Asynchronous inference」（リクエストをキューに入れて非同期処理。大きなペイロード／長い処理時間／準リアルタイム要件向け）: https://docs.aws.amazon.com/sagemaker/latest/dg/async-inference.html
 - vLLM Documentation（"Continuous batching of incoming requests" を高速化機能の中核に列挙＝オンライン配信時のスループット最適化）: https://docs.vllm.ai/en/latest/
-- vLLM Blog「Inside vLLM: Anatomy of a High-Throughput LLM Inference System」（継続バッチングはステップごとに新旧リクエストをまとめてスケジュールする配信時の仕組み）: https://blog.vllm.ai/2025/09/05/anatomy-of-vllm.html
+- vLLM Blog「Inside vLLM: Anatomy of a High-Throughput LLM Inference System」（継続バッチングはステップごとに新旧リクエストをまとめてスケジュールする配信時の仕組み）: https://blog.vllm.ai/blog/2025-09-05-anatomy-of-vllm
