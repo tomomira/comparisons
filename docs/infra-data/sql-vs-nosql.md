@@ -1,9 +1,9 @@
 ---
 title: "SQLとNoSQLの違い"
 category: infra-data
-tags: []
+tags: [database, data]
 created: "2025-07-27"
-updated: "2026-05-15"
+updated: "2026-05-18"
 freshness: stable
 ---
 
@@ -26,7 +26,7 @@ freshness: stable
 
 ---
 
-## 各データベースの詳細
+## 詳細比較
 
 ### 1. SQL (RDBMS: Relational Database Management System)
 
@@ -70,7 +70,14 @@ NoSQLデータベースは、リレーショナルモデルに縛られず、様
 
 **NoSQLは、IoT、SNS、ゲームなど、爆発的に増え続ける非構造化データを高速に処理する必要がある場面で強みを発揮します。**
 
-## どちらを選ぶべきか？
+## よくある誤解
+
+- **「NoSQL は SQL が使えず、ACID トランザクションも持てない」は不正確（過度な単純化）。** 「NoSQL = Not Only SQL」であり「No SQL」ではありません。事実、MongoDB は複数ドキュメントにまたがる ACID トランザクションを公式にサポートし、Amazon DynamoDB も `TransactWriteItems` / `TransactGetItems` で ACID 保証付きのトランザクションを提供します。「NoSQL は常に BASE で ACID は無理」と一律に断じるのは現在では誤りで、製品ごとに ACID 対応の有無・範囲を確認すべきです。
+- **「NoSQL はスキーマレスだから設計不要」は誤り。** 事前にスキーマを宣言しなくてよいだけで、アプリケーション側でデータ構造の一貫性を担保する責任は残ります。アクセスパターンに合わせたデータモデリング（特に KV・カラム指向では設計が性能を大きく左右する）はむしろ重要です。
+- **「SQL はスケールアウトできない」は誤解。** SQL（RDBMS）の基本はスケールアップですが、リードレプリカ・シャーディング・分散 SQL（NewSQL）によって水平スケールも可能です。「スケールアウト＝NoSQL の専売特許」ではありません。
+- **「整合性が大事なら必ず SQL、速度なら必ず NoSQL」は短絡的。** 整合性モデルは製品・設定で選べる場合が多く（強整合読み取りを選べる NoSQL、結果整合を許す構成の RDBMS など）、要件（一貫性レベル・データモデル・アクセスパターン・運用規模）から個別に判断すべきです。
+
+## 実務での選び分け
 
 - **SQLを選ぶケース**:
     - 扱うデータの構造が明確に決まっている。
@@ -82,4 +89,17 @@ NoSQLデータベースは、リレーショナルモデルに縛られず、様
     - 将来的にデータ量が膨大になることが予想される。
     - 高速な読み書き性能や、システムの可用性が整合性よりも優先される。
 
-近年では、両者の長所を取り入れた「NewSQL」と呼ばれるデータベースも登場しており、用途に応じて最適なデータベースを選択することが、システム設計の重要な鍵となっています。 
+近年では、両者の長所を取り入れた「NewSQL」と呼ばれるデータベースも登場しており、用途に応じて最適なデータベースを選択することが、システム設計の重要な鍵となっています。
+
+なお、「NoSQL＝ACID 不可」は今や正確ではなく、MongoDB や DynamoDB のように ACID トランザクションを提供する製品もあります。SQL/NoSQL の二分法はあくまで設計思想の出発点であり、最終判断は製品ごとの実機能（整合性モデル・トランザクション範囲・データモデル）で行うべきです。
+
+## ひとことまとめ
+
+SQL（RDBMS）はリレーショナルモデルと厳格なスキーマ、ACID による強い整合性を軸に「正確さ」を、NoSQL は多様なデータモデルとスキーマ柔軟性、スケールアウトを軸に「拡張性」を重視する設計思想です。ただし「NoSQL＝ACID 不可」は過度な単純化で、要件は製品ごとの実機能（整合性レベル・トランザクション範囲・データモデル）で見極めます。
+
+## 出典・参考
+
+- [ACID Transactions — MongoDB](https://www.mongodb.com/resources/basics/databases/acid-transactions) — 代表的なドキュメント型 NoSQL である MongoDB がシャードクラスタ含め複数ドキュメントの ACID トランザクションを公式サポートすると明記（「NoSQL＝ACID 不可」が単純化である根拠）
+- [Amazon DynamoDB Transactions — AWS 公式ドキュメント](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/transaction-apis.html) — KV/ドキュメント型 NoSQL の DynamoDB が `TransactWriteItems`/`TransactGetItems` で all-or-nothing の ACID 保証トランザクションを提供すると明記
+- [SQL — ISO/IEC 9075（Wikipedia 概説）](https://en.wikipedia.org/wiki/SQL) — SQL がリレーショナルデータベース向けに国際標準化（ISO/IEC 9075）された問い合わせ言語であることの参照
+- [BASE / 結果整合性と CAP 定理（Eventual consistency — Wikipedia）](https://en.wikipedia.org/wiki/Eventual_consistency) — BASE（Basically Available, Soft state, Eventually consistent）と結果整合性の定義の参照
