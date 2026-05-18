@@ -57,7 +57,7 @@ PostgreSQL の公式ドキュメントは `SELECT ... FOR UPDATE` を「取得�
 
 ## 出典・参考
 
-- [Controlling Concurrent Access to Entity Data with Locking — Jakarta EE Tutorial](https://jakarta.ee/learn/docs/jakartaee-tutorial/current/persist/persistence-locking/persistence-locking.html) — 楽観ロックは「コミット前に他トランザクションがデータを変更/削除していないか確認」、悲観ロックは「完了まで長期ロックを取得し他者の変更/削除を防ぐ」、頻繁に競合する場合は悲観・まれな場合は悲観だと性能低下
+- [Controlling Concurrent Access to Entity Data with Locking — Jakarta EE Tutorial](https://jakarta.ee/learn/docs/jakartaee-tutorial/current/persist/persistence-locking/persistence-locking.html) — 楽観ロックは「コミット前に他トランザクションがデータを変更/削除していないか確認」、悲観ロックは「完了まで長期ロックを取得し他者の変更/削除を防ぐ」、頻繁に競合する場合は悲観ロックが適し、更新がまれなデータに悲観ロックをかけると性能低下（Jakarta EE チュートリアルの記述に基づく）
 - [OptimisticLockException — Jakarta Persistence API documentation](https://jakarta.ee/specifications/persistence/3.2/apidocs/jakarta.persistence/jakarta/persistence/optimisticlockexception) — 楽観ロック衝突時に投げられ、現トランザクションはロールバック対象になる。バージョン属性で並行変更を制御
 - [Version — Jakarta Persistence API documentation](https://jakarta.ee/specifications/persistence/3.2/apidocs/jakarta.persistence/jakarta/persistence/version) — `@Version` の許容型（int/Long/Timestamp/Instant 等）、エンティティ階層につき 1 つ、行更新時にバージョンをインクリメントして照合
 - [PostgreSQL Documentation: 13.3 Explicit Locking](https://www.postgresql.org/docs/current/explicit-locking.html) — `SELECT ... FOR UPDATE` は行を更新対象としてロックし他トランザクションのロック/変更/削除をブロック、明示ロックはデッドロックの可能性を高める、回避策は全アプリで一貫した順序でロック取得、アドバイザリロックは悲観ロック戦略の模倣に使える
