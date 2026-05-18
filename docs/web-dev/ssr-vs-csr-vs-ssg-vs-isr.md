@@ -29,7 +29,7 @@ SSR・CSR・SSG・ISR は、Web ページの **HTML を「どこで」「いつ�
 | HTML を生成する場所 | ブラウザ | サーバー | ビルド環境 | ビルド環境＋デプロイ後のサーバー |
 | HTML を生成するタイミング | ページ読み込み後（実行時） | リクエストごと | `build` 実行時に一度 | `build` 時に生成し、その後再生成 |
 | 初回 HTML の中身 | ほぼ空（JS が後から描画） | 完成した HTML | 完成した HTML | 完成した HTML（場合により stale） |
-| TTFB（最初の1バイトまで） | 速い（静的シェルのみ） | リクエストごとの生成分だけ遅くなりうる | 速く安定（生成済み） | 速く安定（基本はキャッシュ配信） |
+| TTFB（最初の1バイトまで） | 速い（中身の薄い静的シェルを返すだけ。シェル配信方法に依存） | リクエストごとの生成分だけ遅くなりうる | 速く安定（生成済み） | 速く安定（基本はキャッシュ配信） |
 | SEO・クローラ対応 | 不利になりやすい（初期 HTML が空） | 有利（完成 HTML を返す） | 有利（完成 HTML を返す） | 有利（完成 HTML を返す） |
 | データの鮮度 | 実行時取得で常に最新にしやすい | リクエストごとに最新 | ビルド時点で固定 | revalidate 間隔／明示トリガーで更新 |
 | ハイドレーション | 必要（最初から JS で構築） | 必要（サーバー HTML に対話性を付与） | 必要（静的 HTML に対話性を付与） | 必要（SSG と同様） |
@@ -59,5 +59,5 @@ CSR＝ブラウザで実行時、SSR＝サーバーでリクエストごと、SS
 ## 出典・参考
 
 - web.dev「Rendering on the Web」（SSR＝サーバーで HTML を生成して返す／CSR＝ブラウザで JS が DOM を構築／static rendering はビルド時／hydration の定義、SSR は TTFB が増えうる等のトレードオフ）: https://web.dev/rendering-on-the-web/
-- Next.js 公式「How to implement Incremental Static Regeneration (ISR)」（ISR はサイト全体を再ビルドせず静的コンテンツを更新する機能。時間ベースは stale-while-revalidate＝古いページを返しつつ裏で再生成。on-demand は `revalidatePath`/`revalidateTag`。ISR は Node.js ランタイム必須、Static Export 非対応）: https://nextjs.org/docs/app/building-your-application/data-fetching/incremental-static-regeneration
+- Next.js 公式「How to implement Incremental Static Regeneration (ISR)」（ISR はサイト全体を再ビルドせず静的コンテンツを更新する機能。時間ベースは stale-while-revalidate＝古いページを返しつつ裏で再生成。on-demand は `revalidatePath`/`revalidateTag`。ISR は Node.js ランタイム必須、Static Export 非対応）: https://nextjs.org/docs/app/guides/incremental-static-regeneration
 - Next.js 公式「revalidatePath」（特定パスのキャッシュをオンデマンドで無効化する API リファレンス）: https://nextjs.org/docs/app/api-reference/functions/revalidatePath

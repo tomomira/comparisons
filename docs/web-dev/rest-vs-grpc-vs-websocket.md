@@ -62,4 +62,4 @@ REST＝HTTP 上のリクエスト/レスポンス（リソース指向・契約�
 - gRPC 公式「Core concepts, architecture and lifecycle」（4種の RPC：unary＝1要求/1応答、server streaming、client streaming、bidirectional streaming＝双方向独立ストリーム）: https://grpc.io/docs/what-is-grpc/core-concepts/
 - gRPC 公式トランスポート仕様「gRPC over HTTP2」（gRPC を HTTP2 framing にマッピングして実装する詳細仕様。RPC を HTTP/2 ストリームに対応づけ、メッセージを DATA フレームで送る）: https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-HTTP2.md
 - RFC 6455「The WebSocket Protocol」（双方向通信を可能にするプロトコル。オープニングハンドシェイク＋基本的なメッセージフレーミングを TCP の上に重ねる。複数 HTTP 接続/long polling に頼らず双方向通信するために設計。ハンドシェイクは HTTP Upgrade として解釈でき既存 HTTP サーバーとポート共有可能）: https://www.rfc-editor.org/rfc/rfc6455.html
-- 当サイト「RESTとGraphQLの違い」（本記事と補完関係：クエリ表現力／オーバーフェッチ・アンダーフェッチの軸の比較）: rest-vs-graphql.md
+- 当サイト「[RESTとGraphQLの違い](rest-vs-graphql.md)」（本記事と補完関係：クエリ表現力／オーバーフェッチ・アンダーフェッチの軸の比較）
