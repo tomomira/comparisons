@@ -30,8 +30,11 @@ REQUIRED_HEADINGS = (
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def check_article(text: str) -> list:
-    """1記事分のテキストを検査し違反メッセージのリストを返す（空=合格）。"""
+def check_article(text: str) -> list[str]:
+    """1記事分のテキストを検査し違反メッセージのリストを返す（空=合格）。
+
+    必須見出しは独立した行として出現する場合のみ充足とみなす（完全一致、またはh + 空白/タブ続き）。
+    """
     problems = []
     fm, body = split_front_matter(text)
 
@@ -48,8 +51,12 @@ def check_article(text: str) -> list:
     if not first.startswith("# 【比較】"):
         problems.append(f"H1 が「# 【比較】」で始まっていません: {first!r}")
 
+    body_lines = body.splitlines()
     for h in REQUIRED_HEADINGS:
-        if h not in body:
+        if not any(
+            ln == h or ln.startswith(h + " ") or ln.startswith(h + "\t")
+            for ln in body_lines
+        ):
             problems.append(f"必須見出し欠落: {h}")
     return problems
 
@@ -69,13 +76,17 @@ def main(argv=None) -> int:
     failed = 0
     for path in _iter_targets(argv):
         total += 1
-        text = Path(path).read_text(encoding="utf-8")
-        problems = check_article(text)
+        p = Path(path)
+        if not p.is_file():
+            failed += 1
+            print(f"ファイルが見つかりません: {p}", file=sys.stderr)
+            continue
+        problems = check_article(p.read_text(encoding="utf-8"))
         if problems:
             failed += 1
-            print(f"[NG] {path}")
-            for p in problems:
-                print(f"     - {p}")
+            print(f"[NG] {p}")
+            for prob in problems:
+                print(f"     - {prob}")
     print(f"checked={total} ng={failed}")
     return 1 if failed else 0
 

@@ -36,3 +36,15 @@ def test_uncontrolled_tag_detected():
     bad = _GOOD.replace("tags: [ai-ml]", "tags: [ai-ml, randomtag]")
     probs = check_article(bad)
     assert any("randomtag" in p for p in probs)
+
+
+def test_heading_with_suffix_does_not_satisfy_requirement():
+    bad = _GOOD.replace("## 概要\nx\n\n", "## 概要（追記あり）\nx\n\n")
+    probs = check_article(bad)
+    assert any("## 概要" in p and "必須見出し欠落" in p for p in probs)
+
+
+def test_no_front_matter_does_not_crash():
+    probs = check_article("# some text\n")
+    assert any("カテゴリ" in p for p in probs)
+    assert any("# 【比較】" in p for p in probs)
