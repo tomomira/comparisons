@@ -33,7 +33,7 @@
 - 公開 URL: https://tomomira.github.io/comparisons/
 - `main` への push で GitHub Actions が自動ビルドし Pages へ反映（数分）。
 
-## 比較を追加・修正する
+## GitHub への反映
 
 1. `docs/<category>/<slug>.md` を追加・編集（category 例: ai-llm / concept / infra-data / web-dev）。
 2. ローカル確認（任意）: `mkdocs serve` → http://127.0.0.1:8000/
