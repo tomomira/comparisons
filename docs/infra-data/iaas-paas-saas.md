@@ -22,7 +22,7 @@ freshness: stable
 | **例えるなら** | **土地**を借りる | **キッチン付きの店舗**を借りる | **レストラン**で食事する | **自分で店を建てる** |
 | **代表的なサービス** | AWS EC2, Google Compute Engine | AWS Lambda, Heroku, Google App Engine | Salesforce, Microsoft 365, Slack | - |
 
-![IaaS / PaaS / SaaS の責任分界点を示す図](https://www.redhat.com/cms/managed-files/iaas-paas-saas-diagram-desktop-v2.svg)
+> 責任分界点の図解は Red Hat の解説ページが分かりやすい: [IaaS、PaaS、SaaS の違い（Red Hat）](https://www.redhat.com/ja/topics/cloud-computing/iaas-vs-paas-vs-saas)
 
 *出典: Red Hat*
 
