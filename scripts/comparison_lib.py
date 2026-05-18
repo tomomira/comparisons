@@ -116,7 +116,7 @@ def write_comparison(
 def split_front_matter(text: str):
     """先頭 YAML front matter を (dict, 残り本文) に分離する。
 
-    title と tags のみ簡易抽出（移行用途。runtime stdlib のみ）。
+    title・category・tags を簡易抽出（移行用途。runtime stdlib のみ）。
     front matter が無ければ ({}, text) を返す。
     """
     text = text.replace("\r\n", "\n")
@@ -141,4 +141,8 @@ def split_front_matter(text: str):
                     [t.strip() for t in inner.split(",") if t.strip()]
                     if inner else []
                 )
+        elif line.startswith("category:"):
+            val = line[len("category:"):].strip().strip('"').strip("'")
+            if val:
+                data["category"] = val
     return data, body

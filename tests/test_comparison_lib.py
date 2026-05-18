@@ -187,3 +187,11 @@ def test_split_front_matter_crlf():
     fm, body = split_front_matter(text)
     assert fm == {"title": "T", "tags": ["a", "b"]}
     assert body == "# 本文\nx\n"
+
+
+def test_split_front_matter_extracts_category():
+    text = '---\ntitle: "T"\ncategory: ai-llm\ntags: [a]\n---\n# 本文\n'
+    fm, body = split_front_matter(text)
+    assert fm["category"] == "ai-llm"
+    assert fm["title"] == "T"
+    assert fm["tags"] == ["a"]

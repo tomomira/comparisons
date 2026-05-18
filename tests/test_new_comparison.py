@@ -31,8 +31,12 @@ def test_creates_file_with_valid_front_matter(tmp_path):
     assert fm["category"] == "ai-llm"
     assert fm["tags"] == ["A", "B"]
     assert fm["freshness"] == "stable"
-    assert "# AとBの違い" in text
-    assert "## 比較表" in text
+    assert "# 【比較】AとBの違い" in text
+    for h in (
+        "## 概要", "## 詳細比較", "## よくある誤解",
+        "## 実務での選び分け", "## ひとことまとめ", "## 出典・参考",
+    ):
+        assert h in text, f"missing heading: {h}"
 
 
 def test_existing_file_without_force_fails(tmp_path):
