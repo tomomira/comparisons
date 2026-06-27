@@ -60,13 +60,14 @@
 - [モジュールとライブラリの違い](docs/web-dev/module-vs-library.md)
 - [ライブラリとフレームワークの違い](docs/web-dev/library-vs-framework.md)
 
-### インフラ・データ（23）
+### インフラ・データ（24）
 
 - [Amazon MSK(Kafka)とECSの違いと連携](docs/infra-data/msk-vs-ecs.md)
 - [AmplifyとCloudFormationとCloudFrontの違い](docs/infra-data/amplify-vs-cloudformation-vs-cloudfront.md)
 - [DBとDWH の違い](docs/infra-data/db-vs-dwh.md)
 - [DockerとPodmanの違い](docs/infra-data/docker-vs-podman.md)
 - [ECSとECRの違い](docs/infra-data/ecs-vs-ecr.md)
+- [GitHubとGitLabの違い](docs/infra-data/github-vs-gitlab.md)
 - [GitとGithubの違い](docs/infra-data/git-vs-github.md)
 - [HTTP/1.1・HTTP/2・HTTP/3の違い](docs/infra-data/http1-vs-http2-vs-http3.md)
 - [IaaS, PaaS, SaaSの違い](docs/infra-data/iaas-paas-saas.md)
