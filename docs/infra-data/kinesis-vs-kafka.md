@@ -1,9 +1,9 @@
 ---
 title: "KinesisとKafkaの違い"
 category: infra-data
-tags: [aws, kafka, streaming]
+tags: [aws, kafka, msk, kinesis, streaming]
 created: "2026-06-25"
-updated: "2026-06-25"
+updated: "2026-06-30"
 freshness: volatile
 ---
 
@@ -56,6 +56,17 @@ freshness: volatile
 - **保持**: トピック単位で柔軟に設定でき、長期保持・再処理（イベントソーシング等）に向く。
 - **可用性**: ブローカーのリーダー/フォロワー構成で冗長化。MSK が構築・パッチ・可用性確保を肩代わりする。
 - **向き**: 高スループット、マルチ/ハイブリッドクラウド、低レイテンシ、既存Kafka資産の活用が必要なケース。
+
+#### Amazon MSK 固有のポイント（"MSK" 観点で押さえる）
+
+「Kafka を AWS で動かす」とき、MSK には Kinesis と直接対比すると見えにくい**固有の選択肢**があります。Kinesis vs MSK を検討するなら以下も判断材料になります。
+
+- **MSK Provisioned と MSK Serverless の2形態**: 通常はブローカー台数・インスタンスタイプを設計する **Provisioned**。容量読みが難しい/運用を極小化したいなら、シャード設計に近い感覚で使える **MSK Serverless** が選べる（Kinesis オンデマンドに近い「運用レス寄り」の選択肢）。
+- **MSK Connect**: Kafka Connect のマネージド版。S3・OpenSearch・各種DBへのコネクタを自前のConnectクラスター運用なしで動かせる（Kinesis の Firehose 連携に相当する立ち位置）。
+- **認証・認可**: **IAMアクセス制御**に対応し、AWSの権限管理に統合できる（ほかに SASL/SCRAM、mTLS）。AWSネイティブな統制を効かせやすい。
+- **裏側の運用**: ブローカーのパッチ・可用性確保は MSK が肩代わりするが、**パーティション設計・スケール判断は利用者責任**。ここが「運用ほぼゼロ」の Kinesis との実務上の差として残る。
+
+> まとめると、**「Kinesis オンデマンド」に最も近い運用感が欲しいなら MSK Serverless**、**Kafkaエコシステム（Connect/Streams/Schema Registry）と移植性が欲しいなら MSK Provisioned** が出発点になります。
 
 ## よくある誤解
 
