@@ -11,9 +11,9 @@
 
 <!-- ARTICLE-INDEX:START -->
 
-### AI・LLM（22）
+### AI・LLM（23）
 
-- [AgentsとAgentCoreの違い](docs/ai-llm/agents-vs-agentcore.md)
+- [Agents（Agents Classic）とAgentCoreの違い](docs/ai-llm/agents-vs-agentcore.md)
 - [Claude Code・Gemini CLI・Warp](docs/ai-llm/claude-code-gemini-cli-warp.md)
 - [Difyとn8nの比較](docs/ai-llm/dify-vs-n8n.md)
 - [Difyとn8nの活用例（情シス活用版）](docs/ai-llm/dify-n8n-jyoshi-usecase.md)
@@ -34,6 +34,7 @@
 - [学習（training）と推論（inference）の違い](docs/ai-llm/training-vs-inference.md)
 - [教師あり学習・教師なし学習・強化学習の違い](docs/ai-llm/supervised-vs-unsupervised-vs-rl.md)
 - [構造化データストアとベクトルストアについて](docs/ai-llm/structured-store-vs-vector-store.md)
+- [機械学習モデル（LightGBM等）と生成AI（LLM）の違い](docs/ai-llm/ml-models-vs-llm.md)
 - [量子化・蒸留・プルーニングの違い](docs/ai-llm/quantization-vs-distillation-vs-pruning.md)
 
 ### Web開発（21）
@@ -60,12 +61,14 @@
 - [モジュールとライブラリの違い](docs/web-dev/module-vs-library.md)
 - [ライブラリとフレームワークの違い](docs/web-dev/library-vs-framework.md)
 
-### インフラ・データ（24）
+### インフラ・データ（26）
 
 - [Amazon MSK(Kafka)とECSの違いと連携](docs/infra-data/msk-vs-ecs.md)
 - [AmplifyとCloudFormationとCloudFrontの違い](docs/infra-data/amplify-vs-cloudformation-vs-cloudfront.md)
+- [CDK と IaC の違い](docs/infra-data/cdk-vs-iac.md)
 - [DBとDWH の違い](docs/infra-data/db-vs-dwh.md)
 - [DockerとPodmanの違い](docs/infra-data/docker-vs-podman.md)
+- [EC2とFargateの違い](docs/infra-data/ec2-vs-fargate.md)
 - [ECSとECRの違い](docs/infra-data/ecs-vs-ecr.md)
 - [GitHubとGitLabの違い](docs/infra-data/github-vs-gitlab.md)
 - [GitとGithubの違い](docs/infra-data/git-vs-github.md)
