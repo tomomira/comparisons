@@ -37,12 +37,13 @@
 - [機械学習モデル（LightGBM等）と生成AI（LLM）の違い](docs/ai-llm/ml-models-vs-llm.md)
 - [量子化・蒸留・プルーニングの違い](docs/ai-llm/quantization-vs-distillation-vs-pruning.md)
 
-### Web開発（21）
+### Web開発（22）
 
 - [CSS-in-JSとユーティリティCSSの違い](docs/web-dev/css-in-js-vs-utility-css.md)
 - [DTO・エンティティ・値オブジェクトの違い](docs/web-dev/dto-vs-entity-vs-vo.md)
 - [JavaScriptとTypeScriptの違い](docs/web-dev/javascript-vs-typescript.md)
 - [JavaとJavaScript の違い](docs/web-dev/java-vs-javascript.md)
+- [Next.jsとNest.jsの違い](docs/web-dev/nextjs-vs-nestjs.md)
 - [RESTとGraphQLの違い](docs/web-dev/rest-vs-graphql.md)
 - [REST・gRPC・WebSocketの違い](docs/web-dev/rest-vs-grpc-vs-websocket.md)
 - [SPAとMPAの違い](docs/web-dev/spa-vs-mpa.md)
