@@ -2,7 +2,7 @@
 
 技術・ツール・概念の比較記事を Markdown で管理し、MkDocs Material で HTML 化するナレッジ集。
 
-- 公開サイト: **https://tomomira.github.io/comparisons/**
+- 公開サイト: **https://compare.tomomira.com/**
 - ソース: このリポジトリ（`docs/` 配下の `.md` がマスター。`site/` は生成物）
 
 ## 📚 記事一覧
@@ -166,7 +166,7 @@
 
 ### ⑥ 反映を確認
 
-数分後に https://tomomira.github.io/comparisons/ を開き、トップ一覧／全文検索に反映されていれば完了。
+数分後に https://compare.tomomira.com/ を開き、トップ一覧／全文検索に反映されていれば完了。
 
 > 反映されない場合: GitHub の **Actions** タブでラン状況を確認する。発火していなければ「**Run workflow**」ボタン（手動 `workflow_dispatch`）で再実行する。初回デプロイや、稀に自動発火しないケースで必要。
 
@@ -181,7 +181,7 @@
 | 既存記事を直す | 同じ `.md` を編集 → ⑤の push（上書き再デプロイ） |
 | 記事を消す | 該当 `.md` を削除 → ⑤の push |
 | テスト | `./.venv/bin/pytest -q` |
-| 公開 URL | https://tomomira.github.io/comparisons/ |
+| 公開 URL | https://compare.tomomira.com/ |
 
 ## ディレクトリ
 
